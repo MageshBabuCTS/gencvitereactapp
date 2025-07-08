@@ -92,3 +92,15 @@
     padding: 10px;
     border-bottom: 1px solid #eee;
   }
+
+  .product-list-link {
+  text-decoration: none; /* Removes underline */
+  color: #007bff;       /* Blue link color */
+  font-weight: bold;
+  display: block;        /* Makes the whole area clickable */
+  transition: color 0.3s ease; /* Smooth transition for hover effect */
+}
+
+.product-list-link:hover {
+  color: #0056b3; /* Darker blue on hover */
+}

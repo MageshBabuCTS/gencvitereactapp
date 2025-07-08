@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
 import api from '../utils/api';
+import { Link } from 'react-router';
 
 function Home() {
   const [products, setProducts] = useState([]);
@@ -26,7 +27,11 @@ function Home() {
   return (
     <ul className="product-list">
       {products.map((product) => (
-        <li key={product.id}>{product.name}  - {product.model}</li>
+        <li key={product.id}>
+            <Link to={`/product/${product.id}`} className='product-list-link'>
+              {product.name}  - {product.model}
+            </Link>
+        </li>
       ))}
     </ul>
   );

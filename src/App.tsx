@@ -6,6 +6,8 @@ import AddProductPage from './pages/AddProductPage';
 import ProtectedRoute from './components/ProtectedRoute';
 import ProtectedNotFoundPage from "./components/ProtectedNotFoundPage";
 import PublicNotFoundPage from "./components/PublicNotFoundPage";
+import ProductDetailPage from "./components/ProductDetailPage";
+
 
 function App() {
   return (
@@ -17,6 +19,7 @@ function App() {
           <Route element={<Layout />}>
             <Route path="/home" element={<HomePage />} />
             <Route path="/add-product" element={<AddProductPage />} />
+            <Route path="/product/:id" element={<ProductDetailPage />} />
             <Route path="*" element={<ProtectedNotFoundPage />} />
           </Route>
         </Route>
