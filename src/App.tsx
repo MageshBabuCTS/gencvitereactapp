@@ -4,6 +4,8 @@ import LoginPage from './pages/LoginPage';
 import HomePage from './pages/HomePage';
 import AddProductPage from './pages/AddProductPage';
 import ProtectedRoute from './components/ProtectedRoute';
+import ProtectedNotFoundPage from "./components/ProtectedNotFoundPage";
+import PublicNotFoundPage from "./components/PublicNotFoundPage";
 
 function App() {
   return (
@@ -15,9 +17,10 @@ function App() {
           <Route element={<Layout />}>
             <Route path="/home" element={<HomePage />} />
             <Route path="/add-product" element={<AddProductPage />} />
+            <Route path="*" element={<ProtectedNotFoundPage />} />
           </Route>
         </Route>
-       
+       <Route path="*" element={<PublicNotFoundPage />} />
       </Routes>
     </BrowserRouter>
   );

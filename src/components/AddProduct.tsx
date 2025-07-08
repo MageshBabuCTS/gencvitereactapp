@@ -5,10 +5,10 @@ function AddProduct() {
   const [name, setName] = useState('');
   const [model, setModel] = useState('');
   const [spec, setSpec] = useState('');
-  const [image, setImage] = useState(null);
+  const [image, setImage] = useState<File | null>(null);
   const [error, setError] = useState('');
 
-  const handleSubmit = async (e) => {
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     setError('');
 
@@ -30,14 +30,15 @@ function AddProduct() {
       setModel('');
       setSpec('');
       setImage(null);
-      e.target.reset(); // Reset file input
+      e.currentTarget.reset(); // Reset file input
     } catch (err) {
+      console.error('Error adding product:', err);
       setError('Failed to add product');
     }
   };
 
-  const handleFileChange = (e) => {
-    setImage(e.target.files[0] || null);
+  const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setImage(e.target.files && e.target.files[0] ? e.target.files[0] : null);
   };
 
   return (
