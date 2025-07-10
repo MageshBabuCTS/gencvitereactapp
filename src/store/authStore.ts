@@ -30,11 +30,6 @@ export const useAuthStore = create<AuthState>()(
     }),
     {
       name: 'auth-storage',
-      storage: {
-        getItem: (name) => Promise.resolve(sessionStorage.getItem(name)),
-        setItem: (name, value) => Promise.resolve(sessionStorage.setItem(name, value)),
-        removeItem: (name) => Promise.resolve(sessionStorage.removeItem(name)),
-      },
       partialize: (state) => ({
         jwt: state.jwt,
         user: state.user,
