@@ -7,15 +7,31 @@ function Login() {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
+  const [usernameWarning, setUsernameWarning] = useState('');
+  const [passwordWarning, setPasswordWarning] = useState('');
   const navigate = useNavigate();
 
-  const handleSubmit = async (e) => {
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     setError('');
+    let valid = true;
+    if (!username.trim()) {
+      setUsernameWarning('Username is required');
+      valid = false;
+    } else {
+      setUsernameWarning('');
+    }
+    if (!password.trim()) {
+      setPasswordWarning('Password is required');
+      valid = false;
+    } else {
+      setPasswordWarning('');
+    }
+    if (!valid) return;
     try {
       await login(username, password);
       navigate('/home');
-    } catch (err) {
+    } catch {
       setError('Invalid credentials');
     }
     //Mock the data  for testing
@@ -32,18 +48,18 @@ function Login() {
         type="text"
         value={username}
         onChange={(e) => setUsername(e.target.value)}
-        placeholder="Username"
-        required
+        placeholder="Enter your username (e.g., sathvika)"
         autoComplete="username"
       />
+      {usernameWarning && <p className="warning" style={{ color: 'orange', margin: 0 }}>{usernameWarning}</p>}
       <input
         type="password"
         value={password}
         onChange={(e) => setPassword(e.target.value)}
-        placeholder="Password"
-        required
+        placeholder="Enter your password (min. 6 characters)"
         autoComplete="current-password"
       />
+      {passwordWarning && <p className="warning" style={{ color: 'orange', margin: 0 }}>{passwordWarning}</p>}
       {error && <p className="error">{error}</p>}
       <button type="submit">Login</button>
     </form>
