@@ -9,13 +9,14 @@ function Login() {
   const [error, setError] = useState('');
   const navigate = useNavigate();
 
-  const handleSubmit = async (e) => {
+  const handleSubmit = async (e:React.FormEvent<HTMLFormElement> ) => {
     e.preventDefault();
     setError('');
     try {
       await login(username, password);
       navigate('/home');
-    } catch (err) {
+    } catch (err: unknown) {
+      console.error("caught error",err);
       setError('Invalid credentials');
     }
     //Mock the data  for testing

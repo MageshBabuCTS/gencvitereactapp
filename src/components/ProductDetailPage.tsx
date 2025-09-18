@@ -1,14 +1,8 @@
 import  { useEffect, useState } from 'react';
 import { useParams } from 'react-router'; // Link is removed as per request
+import type { Product } from '../types/contract';
 
 
-interface Product {
-  id: string;
-  name: string;
-  description: string;
-  price: number;
-  imageUrl: string; // This will now hold a Base64 string
-}
 
 
 function ProductDetailPage() {
@@ -53,7 +47,7 @@ function ProductDetailPage() {
             id: 's25',
             name: 'Samsung Galaxy S25',
             description: 'Introducing our most powerful processor, customised for Galaxy. With improved real-time ray tracing and Vulkan optimization, dive deep into the action with ultra-smooth gameplay thanks to Snapdragon® 8 Elite Mobile Platform for Galaxy.',
-            price: 999.99,
+            price: 999.99,           
             imageUrl: samsungS25ImageBase64, // Using the Base64 image
         };
 

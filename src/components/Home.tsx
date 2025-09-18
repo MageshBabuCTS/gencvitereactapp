@@ -1,18 +1,21 @@
 import { useState, useEffect } from 'react';
 import api from '../utils/api';
 import { Link } from 'react-router';
+import '../ProductCard.css';
+import type { Product } from '../types/contract';
 
 function Home() {
-  const [products, setProducts] = useState([]);
+  const [products, setProducts] = useState<Product[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState('');
 
   useEffect(() => {
     const fetchProducts = async () => {
       try {
-        const response = await api.get('/v1/products');
+        const response = await api.get('/products');
         setProducts(response.data);
       } catch (err) {
+        console.error(err);
         setError('Failed to load products');
       } finally {
         setLoading(false);
@@ -24,16 +27,18 @@ function Home() {
   if (loading) return <p>Loading...</p>;
   if (error) return <p>{error}</p>;
 
-  return (
-    <ul className="product-list">
+ return (  
+   <div className="product-container">
       {products.map((product) => (
-        <li key={product.id}>
-            <Link to={`/product/${product.id}`} className='product-list-link'>
-              {product.name}  - {product.model}
-            </Link>
-        </li>
+        <div key={product.id} className="product-card">
+          <Link to={`/products/${product.id}`}>
+            <img src={product.imageUrl} alt={product.name} className="product-image rounded" />
+          </Link>
+          <div className="product-title">{product.name}</div>
+          <div className="product-price">{product.model}</div>
+        </div>
       ))}
-    </ul>
+    </div>
   );
 }
 

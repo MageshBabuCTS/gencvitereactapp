@@ -1,6 +1,6 @@
 import api from './api';
 
-export const login = async (username, password) => {
+export const login = async (username: string , password: string) => {
   const response = await api.post('/auth/login', { username, password });
   const { jwt, firstName, role, userId, email, phone } = response.data;
   localStorage.setItem('jwt', jwt);
@@ -14,6 +14,6 @@ export const logout = () => {
 };
 
 export const getUserId = () => {
-  const user = JSON.parse(localStorage.getItem('user'));
+  const user = JSON.parse(localStorage.getItem('user') as string);
   return user?.userId;
 };

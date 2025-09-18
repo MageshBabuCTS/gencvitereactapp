@@ -1,6 +1,7 @@
 import { render, screen } from "@testing-library/react";
 import { vi, beforeEach } from "vitest"; // Import beforeEach for setup
 import App from "./App"; // App imports BrowserRouter from 'react-router'
+import type { LayoutProps } from "./types/LayoutProps";
 
 // This variable will hold the initial entries for the MemoryRouter that replaces BrowserRouter
 let currentInitialEntries: string[] = ['/'];
@@ -34,7 +35,7 @@ vi.mock('react-router', async (importOriginal) => {
 vi.mock('./components/Layout', () => ({
     // When Layout is rendered, it will just be a div with data-testid="layout"
     // and it will render its children inside.
-    default: ({ children }: any) => <div data-testid="layout">{children}</div>
+    default: ({ children }: LayoutProps) => <div data-testid="layout">{children}</div>
 }));
 
 vi.mock('./pages/LoginPage', () => ({
@@ -55,7 +56,7 @@ vi.mock('./pages/AddProductPage', () => ({
 vi.mock('./components/ProtectedRoute', () => ({
     // When ProtectedRoute is rendered, it will just be a div with data-testid="protected"
     // and it will render its children inside.
-    default: ({ children }: any) => <div data-testid="protected">{children}</div>
+    default: ({ children }: LayoutProps) => <div data-testid="protected">{children}</div>
 }));
 
 describe("App routing", () => {

@@ -1,0 +1,240 @@
+ul.breadcrumb {
+    padding: 10px 16px;
+    list-style: none;
+    background-color: #eee;
+}
+
+ul.breadcrumb li {
+    display: inline;
+}
+
+ul.breadcrumb li+li:before {
+    padding: 8px;
+    color: black;
+    content: "/\00a0";
+}
+
+.active-link {
+    color: #007bff;
+    font-weight: bold;
+    text-decoration: underline;
+}
+
+
+
+/* A universal box-sizing rule is a best practice for consistent layout behavior */
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+}
+
+html,
+body {
+    /* Make the document and body take up the full viewport dimensions */
+    height: 100vh;
+    width: 100vw;
+    /* Remove default browser margins to prevent scrollbars */
+    margin: 0;
+    padding: 0;
+    font-family: 'Roboto', sans-serif;
+    background-color: #F8F9FA;
+    /* A very light grey, almost white */
+    overflow: hidden;
+}
+
+.grid-container {
+    display: grid;
+    /* Two main columns: one for the sidebar and one for the main content */
+    grid-template-columns: 17.5rem 1fr;
+    /* Use fixed width for a more controlled sidebar */
+    /* Three rows for the content area: header, main, and footer */
+    grid-template-rows: auto 1fr auto;
+
+    gap: 0;
+    /* Remove gap for a unified, clean look */
+    background-color: #F8F9FA;
+
+    /* Add a transition to the grid template columns for a smooth animation */
+    transition: grid-template-columns 0.5s ease;
+
+    height: 100vh;
+    width: 100vw;
+}
+
+/* This class is toggled by JavaScript to collapse the sidebar */
+.grid-container.sidebar-collapsed {
+    grid-template-columns: 3.75rem 1fr;
+    /* Collapse the sidebar to a small icon bar */
+}
+
+.grid-item {
+    padding: 20px;
+    text-align: left;
+    border: none;
+}
+
+.header {
+    /* Position the header in the main content area */
+    grid-column: 2;
+    grid-row: 1;
+    background-color: #FAFAFA;
+    /* Light header background */
+    color: #212121;
+    padding: 15px 20px;
+    /* Use flexbox to align header content and the hamburger menu
+            display: flex; */
+    justify-content: flex-start;
+    /* Start content on the left */
+    align-items: center;
+    border-bottom: 1px solid #E0E0E0;
+    /* Subtle separator line */
+    box-shadow: none;
+    /* No shadow for a flatter design */
+}
+
+.header h1 {
+    margin: 0;
+    font-size: 1.5rem;
+    color: #555;
+    margin-left: 15px;
+    /* Spacing between icon and header text */
+}
+
+.sidebar {
+    background-color: #FFFFFF;
+    /* White sidebar */
+    color: #555;
+    /* Neutral text color */
+    /* Make the sidebar span the full height of the container */
+    grid-column: 1;
+    grid-row: 1 / span 3;
+    padding: 15px 20px;
+    overflow-y: auto;
+    /* Allow the sidebar content to scroll if it overflows */
+    box-shadow: 1px 0 4px rgba(0, 0, 0, 0.1);
+    /* Subtle right-side shadow */
+
+    /* Add flexbox to the sidebar to control layout */
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+}
+
+/* New sidebar-top container to hold the fixed elements */
+.sidebar-top {
+    display: flex;
+    align-items: center;
+    width: 100%;
+    margin-bottom: 20px;
+    position: sticky;
+    /* Make the top section sticky */
+    top: 0;
+    /* Pin it to the top */
+    z-index: 10;
+    background-color: #FFFFFF;
+    /* Match sidebar background to avoid content showing through */
+    padding-bottom: 15px;
+    border-bottom: 1px solid #E0E0E0;
+}
+
+.grid-container.sidebar-collapsed .sidebar-top h2,
+.grid-container.sidebar-collapsed .nav-links {
+    display: none;
+}
+
+.sidebar h2 {
+    font-size: 1rem;
+    text-align: left;
+    margin: 0 0 0 15px;
+    /* Adjust margin to align with hamburger */
+}
+
+.sidebar nav {
+    padding-top: 0;
+    width: 100%;
+}
+
+.sidebar .nav-links {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+}
+
+.sidebar .nav-links li {
+    padding: 8px 12px;
+    border-radius: 20px;
+    /* Rounded corners for list items */
+    transition: background-color 0.3s ease;
+}
+
+.sidebar .nav-links li:hover {
+    background-color: #E8F0FE;
+    /* A light blue background on hover */
+}
+
+.sidebar .nav-links a {
+    text-decoration: none;
+    color: #555;
+    font-weight: 500;
+    display: block;
+}
+
+.sidebar .nav-links a.active-nav-link {
+    color: #305cde;
+    
+}
+
+/* Styles for the hamburger menu button */
+.hamburger {
+    width: 24px;
+    height: 24px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    cursor: pointer;
+    transition: transform 0.3s ease;
+    /* Position the hamburger icon at the top of the sidebar used  to replace sidebar-top */
+    position: sticky;
+    /* Make the top section sticky */
+    top: 0;
+    /* Pin it to the top */
+    z-index: 10;
+}
+
+/* NEW FIX: Adjust the padding of the sidebar when it's collapsed to prevent overflow */
+.grid-container.sidebar-collapsed .grid-item.sidebar {
+    padding: 15px 10px;
+    /* Reduce horizontal padding to fit within the 60px width */
+}
+
+.hamburger:hover {
+    transform: scale(1.05);
+}
+
+.hamburger span {
+    display: block;
+    width: 100%;
+    height: 2px;
+    background-color: #305cde;
+    border-radius: 5px;
+}
+
+.main-content {
+    background-color: #FAFAFA;
+    grid-column: 2;
+    grid-row: 2;
+    padding: 20px 40px;
+    /* Add more padding for content */
+}
+
+.footer {
+    grid-column: 2;
+    grid-row: 3;
+    background-color: #FAFAFA;
+    color: #777;
+    padding: 15px 20px;
+    border-top: 1px solid #E0E0E0;
+    text-align: right;
+    /* Align footer text to the right */
+}

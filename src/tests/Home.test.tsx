@@ -4,6 +4,7 @@ import { MemoryRouter } from 'react-router';
 import Home from '../components/Home';
 import api from '../utils/api';
 
+
 // Define a single, controllable mock function for navigation
 const mockNavigate = vi.fn();
 
