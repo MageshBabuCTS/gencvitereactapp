@@ -1,4 +1,4 @@
-import { BrowserRouter, Routes, Route, Navigate } from "react-router";
+import { Routes, Route, Navigate } from "react-router";
 import Layout from './components/Layout';
 import LoginPage from './pages/LoginPage';
 import HomePage from './pages/HomePage';
@@ -11,21 +11,21 @@ import ProductDetailPage from "./components/ProductDetailPage";
 
 function App() {
   return (
-    <BrowserRouter>
-      <Routes>
-        <Route path="/login" element={<LoginPage />} />
-        <Route path="/" element={<Navigate to="login" replace />} />
-        <Route element={<ProtectedRoute /> }>
-          <Route element={<Layout />}>
-            <Route path="/home" element={<HomePage />} />
-            <Route path="/add-product" element={<AddProductPage />} />          
-            <Route path="/product/:id" element={<ProductDetailPage />} />
-            <Route path="*" element={<ProtectedNotFoundPage />} />
-          </Route>
+
+    <Routes>
+      <Route path="/login" element={<LoginPage />} />
+      <Route path="/" element={<Navigate to="login" replace />} />
+      <Route element={<ProtectedRoute />}>
+        <Route element={<Layout />}>
+          <Route path="/home" element={<HomePage />} />
+          <Route path="/add-product" element={<AddProductPage />} />
+          <Route path="/product/:id" element={<ProductDetailPage />} />
+          <Route path="*" element={<ProtectedNotFoundPage />} />
         </Route>
-       <Route path="*" element={<PublicNotFoundPage />} />
-      </Routes>
-    </BrowserRouter>
+      </Route>
+      <Route path="*" element={<PublicNotFoundPage />} />
+    </Routes>
+
   );
 }
 
